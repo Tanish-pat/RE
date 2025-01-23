@@ -9,7 +9,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the repository
-                git branch: 'main', url: 'https://github.com/tanish-pat/jktut'
+                git branch: 'main', url: 'https://github.com/tanish-pat/RE'
             }
         }
         stage('Setup Virtual Environment') {
