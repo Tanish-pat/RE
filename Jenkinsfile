@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        VENV_DIR = 'venv' // Define a reusable variable for the virtual environment
-        PYTHON = 'python' // Python executable (update if a specific Python version is required)
+        VENV_DIR = 'venv'
+        PYTHON = 'python' 
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
         stage('Setup Virtual Environment') {
             steps {
                 echo 'Setting up virtual environment...'
-                bat "${PYTHON} -m venv ${VENV_DIR}" // Create virtual environment
+                bat "${PYTHON} -m venv ${VENV_DIR}" 
             }
         }
         stage('Install Dependencies') {
@@ -24,7 +24,7 @@ pipeline {
                 echo 'Installing dependencies...'
                 bat """
                 call ${VENV_DIR}\\Scripts\\activate
-                ${PYTHON} -m pip install --upgrade pip // Ensure pip is updated
+                ${PYTHON} -m pip install --upgrade pip 
                 pip install -r requirements.txt
                 """
             }
@@ -34,7 +34,7 @@ pipeline {
                 echo 'Initializing artifacts...'
                 bat """
                 call ${VENV_DIR}\\Scripts\\activate
-                ${PYTHON} main.py // Replace with the correct script for initialization
+                ${PYTHON} main.py
                 """
             }
         }
@@ -43,7 +43,7 @@ pipeline {
                 echo 'Running tests...'
                 bat """
                 call ${VENV_DIR}\\Scripts\\activate
-                pytest tests.py --disable-warnings // Add --disable-warnings for cleaner logs
+                pytest tests.py
                 """
             }
         }
@@ -52,7 +52,7 @@ pipeline {
                 echo 'Deploying application...'
                 bat """
                 call ${VENV_DIR}\\Scripts\\activate
-                uvicorn app:app --host 0.0.0.0 --port 8000 // Customize host/port as needed
+                uvicorn app:app --host 0.0.0.0 --port 8000 
                 """
             }
         }
@@ -61,8 +61,8 @@ pipeline {
     post {
         always {
             echo 'Cleaning up virtual environment and workspace...'
-            bat "rmdir /S /Q ${VENV_DIR}" // Delete the virtual environment folder
-            cleanWs() // Clean up the workspace
+            bat "rmdir /S /Q ${VENV_DIR}" 
+            cleanWs() 
         }
         success {
             echo 'Pipeline executed successfully!'
