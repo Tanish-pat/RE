@@ -28,21 +28,21 @@ pipeline {
                 """
             }
         }
-        stage('Test') {
-            steps {
-                // Activate venv and run tests
-                bat """
-                call ${VENV_DIR}\\Scripts\\activate
-                pytest tests.py
-                """
-            }
-        }
         stage('Initialize Artifacts') {
             steps {
                 // Activate venv and run tests
                 bat """
                 call ${VENV_DIR}\\Scripts\\activate
                 python main.py
+                """
+            }
+        }
+        stage('Test') {
+            steps {
+                // Activate venv and run tests
+                bat """
+                call ${VENV_DIR}\\Scripts\\activate
+                pytest tests.py
                 """
             }
         }
