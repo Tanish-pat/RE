@@ -1,4 +1,4 @@
-from nltk.corpus import stopwords
+# from nltk.corpus import stopwords
 import string
 
 class PreProcessText:
@@ -7,7 +7,11 @@ class PreProcessText:
     removing stopwords, and tokenizing text.
     """
     def __init__(self):
-        self.stop_words = set(stopwords.words('english'))  # Load stopwords once
+        # with open("stopwords.txt", "w") as f:
+        #     f.write("\n".join(stopwords.words("english")))
+        with open("stopwords.txt", "r") as f:
+            self.stop_words = set(f.read().splitlines())
+
 
     @staticmethod
     def __remove_punctuation(text: str) -> str:
