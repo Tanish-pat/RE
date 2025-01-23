@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from app import app  # Replace 'main' with your actual filename if it's different
+from app import app
 
 client = TestClient(app)
 

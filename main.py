@@ -6,6 +6,9 @@ if __name__ == "__main__":
     # Load data
     df = load_data("combined_sms_spam.csv")
 
+    # Remove unexpected labels
+    df = df[df["label"].isin(["ham", "spam"])]
+    
     # Preprocessing
     preprocessor = PreProcessText()
 

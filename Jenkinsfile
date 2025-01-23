@@ -9,7 +9,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the repository
-                git branch: 'main', url: 'https://github.com/tanish-pat/jktut'
+                git branch: 'main', url: 'https://github.com/tanish-pat/RE'
             }
         }
         stage('Setup Virtual Environment') {
@@ -28,21 +28,21 @@ pipeline {
                 """
             }
         }
-        stage('Test') {
-            steps {
-                // Activate venv and run tests
-                bat """
-                call ${VENV_DIR}\\Scripts\\activate
-                pytest tests.py
-                """
-            }
-        }
         stage('Initialize Artifacts') {
             steps {
                 // Activate venv and run tests
                 bat """
                 call ${VENV_DIR}\\Scripts\\activate
                 python main.py
+                """
+            }
+        }
+        stage('Test') {
+            steps {
+                // Activate venv and run tests
+                bat """
+                call ${VENV_DIR}\\Scripts\\activate
+                pytest tests.py
                 """
             }
         }
